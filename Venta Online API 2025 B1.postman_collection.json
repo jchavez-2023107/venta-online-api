@@ -1,0 +1,1904 @@
+{
+	"info": {
+		"_postman_id": "88e31e8e-bb61-469d-9460-a2361c6a3af3",
+		"name": "API Ventas 2025 B1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37956992"
+	},
+	"item": [
+		{
+			"name": "CLIENTES (USUARIOS)",
+			"item": [
+				{
+					"name": "AUTORIZACIÓN",
+					"item": [
+						{
+							"name": "Obtener Perfil (Self)",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:2636/api/users/profile",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "2636",
+									"path": [
+										"api",
+										"users",
+										"profile"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Actualizar Perfil (Self)",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"Joel Actualizado\",\n  \"surname\": \"Pérez Modificado\",\n  \"email\": \"jperez@kinal.edu.gt\",\n  \"phone\": \"87654321\",\n  \"preferences\": {\n    \"newsletter\": false,\n    \"theme\": \"violet\"\n  }\n}"
+								},
+								"url": {
+									"raw": "http://localhost:2636/api/users/profile",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "2636",
+									"path": [
+										"api",
+										"users",
+										"profile"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Actualizar Contraseña (Self)",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"currentPassword\": \"12345678Aa!\",\n  \"newPassword\": \"87654321Zz!\"\n}"
+								},
+								"url": {
+									"raw": "http://localhost:2636/api/users/profile/password",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "2636",
+									"path": [
+										"api",
+										"users",
+										"profile",
+										"password"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Eliminar Cuenta (Self - CLIENT)",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"currentPassword\": \"87654321Zz!\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:2636/api/users/profile",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "2636",
+									"path": [
+										"api",
+										"users",
+										"profile"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Ver mi Historial de Facturas",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:2636/api/users/invoices",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "2636",
+									"path": [
+										"api",
+										"users",
+										"invoices"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Registro de Usuario",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Joel\",\n  \"surname\": \"Pérez\",\n  \"username\": \"jperez\",\n  \"email\": \"jperez@kinal.edu.gt\",\n  \"password\": \"12345678Aa!\",\n  \"phone\": \"55915715\",\n  \"preferences\": {\n    \"newsletter\": true,\n    \"theme\": \"dark\"\n  }\n}"
+						},
+						"url": {
+							"raw": "http://localhost:2636/api/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2636",
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Inicio de Sesión Usuario",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var data = JSON.parse(responseBody);\r",
+									"postman.setGlobalVariable(\"token\", data.token)"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"userlogin\": \"jperez@kinal.edu.gt\",\n  \"password\": \"12345678Aa!\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:2636/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2636",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Test Token",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:2636/api/auth/test",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2636",
+							"path": [
+								"api",
+								"auth",
+								"test"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ADMIN",
+			"item": [
+				{
+					"name": "AUTORIZACIÓN PARA CLIENTES_CRUD",
+					"item": [
+						{
+							"name": "Crear Usuario (por Admin)",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"Sandra\",\n  \"surname\": \"Escobar\",\n  \"username\": \"sescobar\",\n  \"email\": \"sescobar@gmail.com\",\n  \"password\": \"12345678Aa!\",\n  \"phone\": \"56905348\",\n  \"role\": \"ADMIN_ROLE\",\n  \"preferences\": {\n    \"newsletter\": false,\n    \"theme\": \"non-dark\"\n  }\n}"
+								},
+								"url": {
+									"raw": "http://localhost:2636/api/users/createuser",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "2636",
+									"path": [
+										"api",
+										"users",
+										"createuser"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Actualizar Usuario (por Admin)",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"Sandra Actualizada\",\n  \"surname\": \"Escobar Actualizada\",\n  \"phone\": \"78331154\",\n  \"role\": \"CLIENT_ROLE\",\n  \"preferences\": {\n    \"newsletter\": true,\n    \"theme\": \"blue\"\n  }\n}"
+								},
+								"url": {
+									"raw": "http://localhost:2636/api/users/{{userId}}",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "2636",
+									"path": [
+										"api",
+										"users",
+										"{{userId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Eliminar Usuario (por Admin)",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:2636/api/users/deleteuser/{{userId}}",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "2636",
+									"path": [
+										"api",
+										"users",
+										"deleteuser",
+										"{{userId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Listar Usuarios (por Admin)",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:2636/api/users",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "2636",
+									"path": [
+										"api",
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Buscar Usuario por ID (por Admin)",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:2636/api/users/{{userId}}",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "2636",
+									"path": [
+										"api",
+										"users",
+										"{{userId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Obtener Usuarios Eliminados: Audit Logs (por Admin)",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:2636/api/users/deleted",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "2636",
+									"path": [
+										"api",
+										"users",
+										"deleted"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "AUTORIZACIÓN (SELF)",
+					"item": [
+						{
+							"name": "Obtener Perfil (Self)",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:2636/api/users/profile",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "2636",
+									"path": [
+										"api",
+										"users",
+										"profile"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Actualizar Perfil (Self)",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"Marla Actualizada\",\n  \"surname\": \"Pérez Actualizada\",\n  \"phone\": \"47695877\"\n}"
+								},
+								"url": {
+									"raw": "http://localhost:2636/api/users/profile",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "2636",
+									"path": [
+										"api",
+										"users",
+										"profile"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Actualizar Contraseña (Self)",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"currentPassword\": \"12345678Aa!\",\n  \"newPassword\": \"87654321Zz!\"\n}"
+								},
+								"url": {
+									"raw": "http://localhost:2636/api/users/profile/password",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "2636",
+									"path": [
+										"api",
+										"users",
+										"profile",
+										"password"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Inicio de Sesión Admin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var data = JSON.parse(responseBody);\r",
+									"postman.setGlobalVariable(\"token\", data.token)"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"userlogin\": \"mperez@gmail.com\",\n  \"password\": \"12345678Aa!\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:2636/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2636",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Test Token",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:2636/api/auth/test",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2636",
+							"path": [
+								"api",
+								"auth",
+								"test"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "CATEGORÍAS",
+			"item": [
+				{
+					"name": "AUTORIZACIÓN ADMIN",
+					"item": [
+						{
+							"name": "Admin Login",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var data = JSON.parse(responseBody);\r",
+											"postman.setGlobalVariable(\"token\", data.token)"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"userlogin\": \"mperez@gmail.com\",\n  \"password\": \"12345678Aa!\"\n}"
+								},
+								"url": {
+									"raw": "http://localhost:2636/api/auth/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "2636",
+									"path": [
+										"api",
+										"auth",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Crear Categoría (por Admin)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"Medicina\",\n  \"description\": \"Categoría para artículos de la salud\"\n}"
+								},
+								"url": {
+									"raw": "http://localhost:2636/api/categories",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "2636",
+									"path": [
+										"api",
+										"categories"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Actualizar Categoría (por Admin)",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"Juegos+A\",\n  \"description\": \"Categoría actualizada para juegos para todas las edades\"\n}"
+								},
+								"url": {
+									"raw": "http://localhost:2636/api/categories/{{categoryId}}",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "2636",
+									"path": [
+										"api",
+										"categories",
+										"{{categoryId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Eliminar Categoría (por Admin)",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:2636/api/categories/{{categoryId}}",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "2636",
+									"path": [
+										"api",
+										"categories",
+										"{{categoryId}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "AUTORIZACIÓN CUALQUIERA",
+					"item": [
+						{
+							"name": "Obtener Todas las Categorías",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:2636/api/categories",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "2636",
+									"path": [
+										"api",
+										"categories"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Obtener Categoría por ID",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:2636/api/categories/{{categoryId}}",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "2636",
+									"path": [
+										"api",
+										"categories",
+										"{{categoryId}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "PRODUCTOS",
+			"item": [
+				{
+					"name": "AUTORIZACIÓN ADMIN",
+					"item": [
+						{
+							"name": "Admin Login",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var data = JSON.parse(responseBody);\r",
+											"postman.setGlobalVariable(\"token\", data.token)"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"userlogin\": \"mperez@gmail.com\",\n  \"password\": \"12345678Aa!\"\n}"
+								},
+								"url": {
+									"raw": "http://localhost:2636/api/auth/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "2636",
+									"path": [
+										"api",
+										"auth",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Crear producto",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"Pizarrón Virtual de proyección holográfica\",\r\n  \"description\": \"Pizarrón con capacidad de muestras holográficas claras\",\r\n  \"price\": 150,\r\n  \"stock\": 30,\r\n  \"category\": \"{{category_id}}\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:2636/api/products",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "2636",
+									"path": [
+										"api",
+										"products"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Actualizar Producto",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"Pizarrón 30X\",\r\n  \"description\": \"Pizarrón con luces led súper brillantes y brillo interno incluído\",\r\n  \"price\": 200,\r\n  \"stock\": 25\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:2636/api/products/{{product_id}}",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "2636",
+									"path": [
+										"api",
+										"products",
+										"{{product_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Eliminar Producto",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:2636/api/products/{{product_id}}",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "2636",
+									"path": [
+										"api",
+										"products",
+										"{{product_id}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "AUTORIZACIÓN CUALQUIERA",
+					"item": [
+						{
+							"name": "Cliente Login",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var data = JSON.parse(responseBody);\r",
+											"postman.setGlobalVariable(\"token\", data.token)"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"userlogin\": \"aperez@gmail.com\",\n  \"password\": \"12345678Aa!\"\n}"
+								},
+								"url": {
+									"raw": "http://localhost:2636/api/auth/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "2636",
+									"path": [
+										"api",
+										"auth",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Admin Login",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var data = JSON.parse(responseBody);\r",
+											"postman.setGlobalVariable(\"token\", data.token)"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"userlogin\": \"mperez@gmail.com\",\n  \"password\": \"12345678Aa!\"\n}"
+								},
+								"url": {
+									"raw": "http://localhost:2636/api/auth/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "2636",
+									"path": [
+										"api",
+										"auth",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Obtener Producto por ID",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:2636/api/products/{{product_id}}",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "2636",
+									"path": [
+										"api",
+										"products",
+										"{{product_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Obtener Productos",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:2636/api/products",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "2636",
+									"path": [
+										"api",
+										"products"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Obtener Productos Agotados",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:2636/api/products/out-of-stock",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "2636",
+									"path": [
+										"api",
+										"products",
+										"out-of-stock"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Obtener Productos Más Vendidos",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:2636/api/products/top-selling",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "2636",
+									"path": [
+										"api",
+										"products",
+										"top-selling"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Obtener Productos Por Nombre",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:2636/api/products?name=teclado",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "2636",
+									"path": [
+										"api",
+										"products"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "teclado"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Obtener Todas las Categorías Para Productos",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:2636/api/categories",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "2636",
+									"path": [
+										"api",
+										"categories"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Obtener Productos Por Categoría",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:2636/api/products?category={{id_category}}",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "2636",
+									"path": [
+										"api",
+										"products"
+									],
+									"query": [
+										{
+											"key": "category",
+											"value": "{{id_category}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "CARRITO",
+			"item": [
+				{
+					"name": "AUTENTICACIÓN",
+					"item": [
+						{
+							"name": "Cliente Login",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var data = JSON.parse(responseBody);\r",
+											"postman.setGlobalVariable(\"token\", data.token)"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"userlogin\": \"jperez@kinal.edu.gt\",\n  \"password\": \"12345678Aa!\"\n}"
+								},
+								"url": {
+									"raw": "http://localhost:2636/api/auth/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "2636",
+									"path": [
+										"api",
+										"auth",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Admin Login",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var data = JSON.parse(responseBody);\r",
+											"postman.setGlobalVariable(\"token\", data.token)"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"userlogin\": \"mperez@gmail.com\",\n  \"password\": \"12345678Aa!\"\n}"
+								},
+								"url": {
+									"raw": "http://localhost:2636/api/auth/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "2636",
+									"path": [
+										"api",
+										"auth",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Obtener Carrito",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:2636/api/cart",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "2636",
+									"path": [
+										"api",
+										"cart"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Agregar Producto",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"productId\": \"{{id_del_producto}}\",\r\n  \"quantity\": 2\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:2636/api/cart",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "2636",
+									"path": [
+										"api",
+										"cart"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Actualizar Cantidad",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"productId\": \"{{id_del_producto}}\",\r\n  \"quantity\": 5\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:2636/api/cart",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "2636",
+									"path": [
+										"api",
+										"cart"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Eliminar Producto del Carrito",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"productId\": \"{{id_del_producto}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:2636/api/cart",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "2636",
+									"path": [
+										"api",
+										"cart"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Vaciar Carrito",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:2636/api/cart/clear",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "2636",
+									"path": [
+										"api",
+										"cart",
+										"clear"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "FACTURAS",
+			"item": [
+				{
+					"name": "AUTORIZACIÓN CLIENTE",
+					"item": [
+						{
+							"name": "Cliente Login",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var data = JSON.parse(responseBody);\r",
+											"postman.setGlobalVariable(\"token\", data.token)"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"userlogin\": \"aperez@gmail.com\",\n  \"password\": \"12345678Aa!\"\n}"
+								},
+								"url": {
+									"raw": "http://localhost:2636/api/auth/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "2636",
+									"path": [
+										"api",
+										"auth",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Crear Factura",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:2636/api/invoices",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "2636",
+									"path": [
+										"api",
+										"invoices"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Obtener Factura por ID",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:2636/api/invoices/{{invoice_id}}",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "2636",
+									"path": [
+										"api",
+										"invoices",
+										"{{invoice_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Ver mi Historial de Facturas",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:2636/api/users/invoices",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "2636",
+									"path": [
+										"api",
+										"users",
+										"invoices"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "AUTORIZACIÓN ADMIN",
+					"item": [
+						{
+							"name": "Admin Login",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var data = JSON.parse(responseBody);\r",
+											"postman.setGlobalVariable(\"token\", data.token)"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"userlogin\": \"mperez@gmail.com\",\n  \"password\": \"12345678Aa!\"\n}"
+								},
+								"url": {
+									"raw": "http://localhost:2636/api/auth/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "2636",
+									"path": [
+										"api",
+										"auth",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Obtener Todas las Facturas",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:2636/api/invoices",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "2636",
+									"path": [
+										"api",
+										"invoices"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Obtener Factura por ID (Admin)",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:2636/api/invoices/{{id_factura}}",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "2636",
+									"path": [
+										"api",
+										"invoices",
+										"{{id_factura}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Actualizar Estado Factura (PAID)",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"status\": \"PAID\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:2636/api/invoices/{{invoice_id}}",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "2636",
+									"path": [
+										"api",
+										"invoices",
+										"{{invoice_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Actualizar Estado Factura (CANCELLED)",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"status\": \"CANCELLED\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:2636/api/invoices/{{invoice_id}}",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "2636",
+									"path": [
+										"api",
+										"invoices",
+										"{{invoice_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Actualizar Estado Factura (CREATED)",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"status\": \"CREATED\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:2636/api/invoices/{{invoice_id}}",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "2636",
+									"path": [
+										"api",
+										"invoices",
+										"{{invoice_id}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
