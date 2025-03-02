@@ -1,16 +1,16 @@
 import { Router } from "express";
-import AuditLog from "../models/auditLog.model.js";
+import AuditLog from "../users/audit.log.model.js";
 import { validateJWT } from "../../middlewares/validate.jwt.js";
 import { authorizeRoles } from "../../middlewares/authorize.roles.js";
 
-const router = Router();
+const api = Router();
 
 /**
  * GET /api/audit-logs
  * Este endpoint permite a los administradores ver todos los registros de auditoría.
  * Se requiere token válido y rol ADMIN.
  */
-router.get("/", validateJWT, authorizeRoles("ADMIN_ROLE"), async (req, res) => {
+api.get("/", validateJWT, authorizeRoles("ADMIN_ROLE"), async (req, res) => {
   try {
     const logs = await AuditLog.find()
       .populate("user", "username email")
@@ -23,4 +23,4 @@ router.get("/", validateJWT, authorizeRoles("ADMIN_ROLE"), async (req, res) => {
   }
 });
 
-export default router;
+export default api;

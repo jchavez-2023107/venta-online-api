@@ -1,5 +1,5 @@
 /**
- * auditLog.model.js
+ * audit.log.model.js
  *
  * Este modelo define el esquema para los registros de auditoría de acciones sensibles en la aplicación.
  *
@@ -16,7 +16,7 @@
 
 import mongoose from "mongoose";
 
-const auditLogSchema = new mongoose.Schema(
+const auditlogSchema = new mongoose.Schema(
   {
     user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
     action: { type: String, required: true },
@@ -27,4 +27,4 @@ const auditLogSchema = new mongoose.Schema(
   { versionKey: false }
 );
 
-export default mongoose.model("AuditLog", auditLogSchema);
+export default mongoose.model("AuditLog", auditlogSchema);

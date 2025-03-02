@@ -1,6 +1,6 @@
 //Validar datos relacionados a la BD
 
-import User from '../src/models/user.model.js'
+import User from '../src/users/user.model.js'
 
 export const existUsername = async(username)=>{
     const alreadyUsername = await User.findOne({username})
